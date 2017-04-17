@@ -8,17 +8,13 @@ class TasksController < ApplicationController
     
     if @task.save
       flash[:success] = "Taskが正常に投稿されました"
-      redirect_to = @task
+      redirect_to  @task
     else
       flash.now[:danger] = "Taskが投稿されませんでした"
       render :new
     end
   end
   
-  #Strong Parameter
-  def task_params
-    params.require(:task).permit(:content)
-  end
   
   
   
@@ -53,6 +49,14 @@ class TasksController < ApplicationController
     
     flash[:success] = "Taskは正常に削除されました"
     redirect_to tasks_url
+  end
+  
+  private
+  
+  
+  #Strong Parameter
+  def task_params
+    params.require(:task).permit(:content)
   end
   
   
