@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :require_user_logged_in
-  before_action :correct_user, only: [:destroy, :update]
+  before_action :correct_user, only: [:destroy, :update, :edit, :show]
   
   def index
     
@@ -70,6 +70,7 @@ class TasksController < ApplicationController
     @task = current_user.tasks.find_by(id: params[:id])
     unless @task
       redirect_to root_path
+      flash[:danger] = "そのようなページは存在しません"
       
     end
   end
